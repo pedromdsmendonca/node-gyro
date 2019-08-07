@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -5,8 +6,9 @@
         <script src="scripts/gyro.js"></script>      
     </head>
     <body>
-        <div class="text-wrapper">
-            <h1 class="output">gamma: x / beta: x</h1>
-        </div>
+        <div style="margin: 0 auto; text-align: center"> <input type="button" value="Calibrate TOP" id="top" style="width: 50%; height: 100px" onclick="calibrateTop()"/></div>
+        <div style="margin: 0 auto; text-align: center"> <input type="button" value="Calibrate BOTTOM" id="bottom" style="width: 50%; height: 100px" onclick="calibrateBottom()"/></div>
+        <div style="margin: 0 auto; text-align: center"> <input type="button" value="Calibrate LEFT" id="left" style="width: 50%; height: 100px" onclick="calibrateLeft()"/></div>
+        <div style="margin: 0 auto; text-align: center"> <input type="button" value="Calibrate RIGHT" id="right" style="width: 50%; height: 100px" onclick="calibrateRight()"/></div>
     </body>
 </html>

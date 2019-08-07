@@ -34,13 +34,23 @@ io.on("connection", socket => {
         serverSocket = socket
     })
     socket.on('gyro', data => {
-        console.log('received gyro data')
         if(serverSocket)
             serverSocket.emit('gyro', data)
     })
-})
-
-io.on('message', msg => {
-    console.log('received a message')
-    console.log(msg)
+    socket.on('top', data => {
+        if(serverSocket)
+            serverSocket.emit('top', data)
+    })
+    socket.on('bottom', data => {
+        if(serverSocket)
+            serverSocket.emit('bottom', data)
+    })
+    socket.on('left', data => {
+        if(serverSocket)
+            serverSocket.emit('left', data)
+    })
+    socket.on('right', data => {
+        if(serverSocket)
+            serverSocket.emit('right', data)
+    })
 })
