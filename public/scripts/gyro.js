@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         //   rotX += (b - rotX) / 5;
     
         output.text('gamma: ' + g + ' / beta: ' + b + ' / alpha: ' + a);
-        socket.emit('gyro', `${a}:${b}:${g}`)
+        socket.emit('gyro', `${_a}:${_b}:${_g}`)
         //   bgImg.css('transform', 'rotateY('+rotY+'deg) rotateX('+rotX+'deg)');
     }
 });
