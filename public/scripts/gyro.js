@@ -1,18 +1,19 @@
 const socket = io();
+socket.emit('player', 'i am a player')
+let player = 0
+
+socket.on("register", data => {
+    player = Number(data)
+})
 
 let alpha, beta
 
-function calibrateTop(){
-    socket.emit('top', beta);
+function calibrateTopLeft(){
+    socket.emit('topLeft', player + ':' + alpha + ':' + beta);
 }
-function calibrateBottom(){
-    socket.emit('bottom', beta);
-}
-function calibrateLeft(){
-    socket.emit('left', alpha);
-}
-function calibrateRight(){
-    socket.emit('right', alpha);
+
+function calibrateBottomRight(){
+    socket.emit('bottomRight', player + ':' + alpha + ':' + beta);
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -33,6 +34,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         alpha = _a
         beta = _b
 
-        socket.emit('gyro', `${_a}:${_b}:${_g}`)
+        socket.emit('gyro', `${player}:${_a}:${_b}:${_g}`)
     }
 });

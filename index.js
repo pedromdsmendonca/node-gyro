@@ -27,8 +27,13 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 app.use(express.static('public'))
 
 var serverSocket = null
+var lastPlayer = -1
 
 io.on("connection", socket => {
+    socket.on('player', () => {
+        console.log('player registering')
+        socket.emit('register', ++lastPlayer)
+    })
     socket.on('server', () => {
         console.log('server registering')
         serverSocket = socket
@@ -37,20 +42,14 @@ io.on("connection", socket => {
         if(serverSocket)
             serverSocket.emit('gyro', data)
     })
-    socket.on('top', data => {
+    socket.on('topLeft', data => {
+        console.log('tl ' + data)
         if(serverSocket)
-            serverSocket.emit('top', data)
+            serverSocket.emit('calibrate', '0:' + data)
     })
-    socket.on('bottom', data => {
+    socket.on('bottomRight', data => {
+        console.log('br ' + data)
         if(serverSocket)
-            serverSocket.emit('bottom', data)
-    })
-    socket.on('left', data => {
-        if(serverSocket)
-            serverSocket.emit('left', data)
-    })
-    socket.on('right', data => {
-        if(serverSocket)
-            serverSocket.emit('right', data)
+            serverSocket.emit('calibrate', '1:' + data)
     })
 })
