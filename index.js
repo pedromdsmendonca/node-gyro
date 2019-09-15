@@ -1,4 +1,5 @@
 const express = require('express')
+const socketRouter = require('./sockets')
 const app = express()
 const PORT = process.env.PORT || 5000
 
@@ -22,12 +23,20 @@ app.get('/', function(req, res){
 app.get('/game', function(req, res){
     res.sendFile(__dirname + '/game.html');
 });
+app.get('/cq', function(req, res){
+    res.sendFile(__dirname + '/cq.html');
+});
+app.get('/cqp', function(req, res){
+    res.sendFile(__dirname + '/cq-player.html');
+});
 app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use(express.static('public'))
 
 var serverSocket = null
 var lastPlayer = -1
+
+cqServerSockets = {}
 
 io.on("connection", socket => {
     socket.on('player', () => {
@@ -52,4 +61,6 @@ io.on("connection", socket => {
         if(serverSocket)
             serverSocket.emit('calibrate', '1:' + data)
     })
+
+    socketRouter(socket)
 })
